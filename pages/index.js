@@ -1,8 +1,8 @@
 import { useState, useRef } from "react";
 import classes from "./index.module.css";
 import { useRouter } from "next/router";
-import { signIn } from "next-auth/client";
-import { useSession, getSession } from "next-auth/client";
+import { signIn } from "next-auth/react";
+import { getSession } from "next-auth/react";
 import { useEffect } from "react";
 
 async function createUser(user, password) {

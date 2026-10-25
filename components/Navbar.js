@@ -1,9 +1,7 @@
 import Link from "next/link";
-import { useSession, signOut } from "next-auth/client";
+import { signOut } from "next-auth/react";
 
 const Navbar = () => {
-  const [session, loading] = useSession();
-
   function logoutHandler() {
     signOut();
   }

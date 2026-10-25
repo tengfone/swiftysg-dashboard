@@ -1,4 +1,4 @@
-import { useRouter } from "next/dist/client/router";
+import { useRouter } from "next/router";
 import { FaCheck, FaPencilAlt, FaTrashAlt } from "react-icons/fa";
 
 const Order = ({ order, deleteRecord, verifyRecord }) => {

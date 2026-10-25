@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Navbar from "../../components/Navbar";
-import { useSession, getSession } from "next-auth/client";
+import { getSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import OrderList from "../../components/OrderList";
 import axios from "axios";
@@ -8,7 +8,6 @@ import axios from "axios";
 function IndexPage() {
   // Redirect away if NOT auth
   const [isAuthLoading, setIsAuthLoading] = useState(true);
-  const [session, loading] = useSession();
   const [isLoading, setIsLoading] = useState(true);
   const [orders, setOrders] = useState(null);
   const [requestData, setRequestData] = useState(new Date());

@@ -1,15 +1,20 @@
 import NextAuth from "next-auth";
-import Providers from "next-auth/providers";
+import CredentialsProvider from "next-auth/providers/credentials";
 import { verifyPassword } from "../../../helper/auth";
 import { connectToDatabase } from "../../../helper/db";
 
 export default NextAuth({
   session: {
-    jwt: true,
-    maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+    strategy: "jwt",
+    maxAge: 30 * 24 * 60 * 60, // 30 days (seconds)
   },
   providers: [
-    Providers.Credentials({
+    CredentialsProvider({
+      name: "Credentials",
+      credentials: {
+        user: { label: "User Name", type: "text" },
+        password: { label: "Password", type: "password" },
+      },
       async authorize(credentials) {
         const client = await connectToDatabase();
         const usersCollection = client.db().collection("dashboardUsers");
@@ -34,7 +39,7 @@ export default NextAuth({
 
         client.close();
 
-        return { user: user.user };
+        return { id: String(user._id), name: user.user, user: user.user };
       },
     }),
   ],
